@@ -32,7 +32,7 @@ requirements:
 
 test:
   imports:
-    - jxlpy
+    - jxlpy  # [build_platform == target_platform]
   commands:
     - pip check
   requires:
