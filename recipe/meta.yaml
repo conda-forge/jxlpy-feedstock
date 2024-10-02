@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/jxlpy-{{ version }}.tar.gz
-  sha256: 2aa766f1bde180ed10df313af2b48833825deeea631be490cb04ac786c021542
+  sha256: 2aa766f1bde180ed10df313af2b48833825deeea631be490cb04ac786c021542  # [win]
   patches:
     - support-windows.patch
 
