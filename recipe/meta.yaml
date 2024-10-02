@@ -18,15 +18,16 @@ requirements:
   build:
     - {{ compiler("cxx") }}
     - {{ stdlib("c") }}
+    - cross-python_{{ target_platform }}    # [build_platform != target_platform]
+    - cython                                # [build_platform != target_platform]
+    - python                                # [build_platform != target_platform]
   host:
     - cython
     - libjxl
     - pip
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - python
     - setuptools
   run:
-    - cython
     - libjxl
     - pillow
     - python
