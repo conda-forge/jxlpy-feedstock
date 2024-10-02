@@ -1,0 +1,37 @@
+diff --git a/setup.py b/setup.py
+index 97702c5..eeea3c7 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,18 +1,30 @@
+ from setuptools import Extension, setup
+ from Cython.Build import cythonize
+ import os
++import sys
+ 
+ 
+ with open("README.md", 'r') as f:
+     long_description = f.read()
+ 
+ 
++if sys.platform.startswith('win'):
++    extra_compile_args = ['/O2']
++    extra_link_args = []
++    libraries = ['jxl', 'jxl_threads']
++else:
++    extra_compile_args = ['-O2']
++    extra_link_args = ['-ljxl', '-ljxl_threads']
++    libraries = []
++
++
+ jxlpy_ext = Extension(
+     name="_jxlpy",
+     sources=["_jxlpy/_jxl.pyx" if os.path.exists("_jxlpy/_jxl.pyx") else "_jxlpy/_jxl.cpp"],
+     include_dirs=[],
+-    extra_compile_args=['-O2'],
+-    extra_link_args=['-ljxl', '-ljxl_threads'],
++    extra_compile_args=extra_compile_args,
++    extra_link_args=extra_compile_args,
++    libraries=libraries,
+     language='c++',
+ )
+ 
