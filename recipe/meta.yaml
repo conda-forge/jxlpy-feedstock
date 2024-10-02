@@ -22,7 +22,8 @@ requirements:
     - cython
     - libjxl
     - pip
-    - python
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - setuptools
   run:
     - cython
@@ -32,7 +33,7 @@ requirements:
 
 test:
   imports:
-    - jxlpy  # [build_platform == target_platform]
+    - jxlpy
   commands:
     - pip check
   requires:
