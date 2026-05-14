@@ -1,0 +1,12 @@
+diff --git a/setup.py b/setup.py
+index 97702c5..0a7d7cb 100644
+--- a/setup.py
++++ b/setup.py
+@@ -29,7 +29,7 @@ setup(name='jxlpy',
+       },
+       include_package_data=True,
+-      install_requires=['cython'],
++      install_requires=[],
+       extras_require={'pillow': ['Pillow']},
+       python_requires='>=3.4',
+       ext_modules=cythonize([jxlpy_ext]),

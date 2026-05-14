@@ -9,11 +9,12 @@ source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/jxlpy-{{ version }}.tar.gz
   sha256: 2aa766f1bde180ed10df313af2b48833825deeea631be490cb04ac786c021542
   patches:
+    - remove-cython-runtime.patch
     - support-windows.patch  # [win]
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 6
+  number: 7
 
 requirements:
   build:
@@ -29,7 +30,6 @@ requirements:
     - python
     - setuptools
   run:
-    - cython
     - libjxl
     - pillow
     - python
@@ -39,6 +39,9 @@ test:
     - jxlpy
   commands:
     - pip check
+    - python run_test.py
+  files:
+    - run_test.py
   requires:
     - pip
 
