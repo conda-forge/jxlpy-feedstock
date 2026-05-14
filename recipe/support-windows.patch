@@ -30,7 +30,7 @@ index 97702c5..eeea3c7 100644
 -    extra_compile_args=['-O2'],
 -    extra_link_args=['-ljxl', '-ljxl_threads'],
 +    extra_compile_args=extra_compile_args,
-+    extra_link_args=extra_compile_args,
++    extra_link_args=extra_link_args,
 +    libraries=libraries,
      language='c++',
  )
