@@ -1,0 +1,70 @@
+schema_version: 1
+
+context:
+  name: jxlpy
+  version: "0.9.5"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/jxlpy-${{ version }}.tar.gz
+  sha256: 2aa766f1bde180ed10df313af2b48833825deeea631be490cb04ac786c021542
+  patches:
+    - remove-cython-runtime.patch
+    - if: win
+      then: support-windows.patch
+
+build:
+  number: 8
+  script:
+    - python -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - cython
+        - pip
+        - python
+        - setuptools
+  host:
+    - cython
+    - libjxl
+    - pip
+    - python
+    - setuptools
+  run:
+    - libjxl
+    - pillow
+    - python
+
+tests:
+  - python:
+      imports:
+        - jxlpy
+  - script:
+      - pip check
+      - python run_test.py
+    requirements:
+      run:
+        - pip
+        - python
+    files:
+      recipe:
+        - run_test.py
+
+about:
+  homepage: https://github.com/olokelo/jxlpy
+  repository: https://github.com/olokelo/jxlpy
+  summary: Cython bindings and Pillow plugin for JPEG XL
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - jeongseok-meta
