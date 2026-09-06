@@ -13,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '19'
+- '21'
 libjxl:
 - '0.12'
 macos_machine:
@@ -23,6 +23,9 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.14.* *_cp314
 target_platform:
 - osx-arm64
+zip_keys:
+- - python
+  - channel_sources
